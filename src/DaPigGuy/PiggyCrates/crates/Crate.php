@@ -85,5 +85,6 @@ class Crate
                 return true;
             }
         }
+        return false;
     }
 }
