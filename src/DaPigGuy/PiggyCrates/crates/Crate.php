@@ -79,11 +79,11 @@ class Crate
         $player->getInventory()->addItem($key);
     }
 
-    public function isValidKey(Item $item): bool
-    {
-        return $item->getId() === (int)$this->plugin->getConfig()->getNested("keys.id") &&
-            $item->getMeta() === (int)$this->plugin->getConfig()->getNested("keys.meta") &&
-            ($keyTypeTag = $item->getNamedTag()->getTag("KeyType")) instanceof StringTag &&
-            $keyTypeTag->getValue() === $this->getName();
+    public function isValidKey(Item $item) : bool {
+        if ($item->getId() === (int) $this->plugin->getConfig()->getNested("keys.id")) {
+            if ($item->hasNamedTag() && ($keyTypeTag = $item->getNamedTag()->getTag("KeyType")) instanceof StringTag && $keyTypeTag->getValue() === $this->getName()) {
+                return true;
+            }
+        }
     }
 }
